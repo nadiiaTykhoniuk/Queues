@@ -2,6 +2,7 @@
 
 namespace App\Jobs\Example1;
 
+use App\Jobs\Middleware\RateLimited;
 use App\Models\Russian;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -44,5 +45,10 @@ class KillRussian implements ShouldQueue, ShouldBeUnique
     public function retryUntil()
     {
         return now()->addMinutes(10);
+    }
+    
+    public function middleware()
+    {
+        return [new RateLimited()];
     }
 }

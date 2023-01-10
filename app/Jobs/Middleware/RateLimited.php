@@ -3,9 +3,13 @@
 namespace App\Jobs\Middleware;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Queue\Jobs\Job;
 
 class RateLimited
 {
+    /**
+     * @param Job $job
+     */
     public function handle($job, $next) {
 
         // We need some identifier for a group of jobs
@@ -21,7 +25,7 @@ class RateLimited
             return $next($job);
         }
 
-        // Send a job back to the queue if the lock can't acquired
+        // Send a job back to the queue if the lock can't acquire
         return $job->release();
     }
 }
