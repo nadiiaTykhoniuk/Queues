@@ -9,9 +9,9 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Bus;
 use Throwable;
 
-class Deploy extends Command
+class DeployChain extends Command
 {
-    protected $signature = 'deploy {server}';
+    protected $signature = 'deploy:chain {server}';
     protected $description = 'Deploy';
     public function __construct()
     {
@@ -27,14 +27,14 @@ class Deploy extends Command
             function () {
                 echo "Deployed successfully! \n";
             }
-        ])->onQueue('deployments')->dispatch();
+        ])->onConnection('sync')->onQueue('deployments')->dispatch();
 
 //        Bus::chain([
 //            new RunCodeQualityChecks(),
 //            new RunTests('staging'),
 //            new PushBrunchToServer($this->argument('server'))
 //        ])->catch(function (Throwable $e) {
-//            echo "Deploy failed! \n";
-//        })->dispatch();
+//            echo "DeployChain failed! \n";
+//        })->onConnection('sync')->dispatch();
     }
 }
