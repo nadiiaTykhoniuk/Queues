@@ -35,6 +35,10 @@ class ProcessPodcast implements ShouldQueue
 
         echo "View podcast: " . $this->podcast->name . "\n";
 
+//        echo "Pending job: " . $this->batch()->pendingJobs . "\n";
+//        echo "Processed jobs:" . $this->batch()->processedJobs() . "\n";
+//        echo "Progress: " . $this->batch()->progress() . "% \n";
+
         //abort(500);
     }
 }
