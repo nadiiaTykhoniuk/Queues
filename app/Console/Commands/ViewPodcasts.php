@@ -37,6 +37,28 @@ class ViewPodcasts extends Command
             echo "The batch ". $batch->id . " finally finished dispatching! \n";
         })->dispatch();
 
+
+        $batch->id;
+
+        $batch->name;
+
+        $batch->totalJobs;
+
+        $batch->pendingJobs;
+
+        $batch->failedJobs;
+
+        $batch->processedJobs();
+
+        $batch->progress();
+
+        $batch->finished();
+
+        $batch->cancel();
+
+        $batch->cancelled();
+
+
         return $batch->id;
     }
 }

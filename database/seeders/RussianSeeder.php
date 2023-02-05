@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Russian;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class RussianSeeder extends Seeder
 {
     /**
      * Seed the application's database.
@@ -13,8 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(PodcastSeeder::class);
-        $this->call(RussianSeeder::class);
-        // \App\Models\User::factory(10)->create();
+        for ($i=0; $i<=20; $i++) {
+            Russian::create();
+        }
     }
 }

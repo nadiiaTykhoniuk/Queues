@@ -17,8 +17,8 @@ class KillRussian implements ShouldQueue, ShouldBeUnique
 
     public $russian;
     public $uniqueFor = 360;
-    public $delay = 10;
-    public $retryAfter = 5;
+    //public $delay = 10;
+    public $timeout = 30;
     public $tries = 5;
     public $maxExceptions = 3;
 
@@ -29,6 +29,8 @@ class KillRussian implements ShouldQueue, ShouldBeUnique
 
     public function handle()
     {
+        //sleep(300);
+        //abort(500);
         $this->russian->kill();
     }
 
@@ -37,16 +39,15 @@ class KillRussian implements ShouldQueue, ShouldBeUnique
         return $this->russian->id;
     }
 
-    public function retryAfter()
-    {
-        return 5;
-    }
-
     public function retryUntil()
     {
-        return now()->addMinutes(10);
+        return now()->addSeconds(10);
     }
-    
+
+    public function getJobGroup() {
+        return "default";
+    }
+
     public function middleware()
     {
         return [new RateLimited()];
